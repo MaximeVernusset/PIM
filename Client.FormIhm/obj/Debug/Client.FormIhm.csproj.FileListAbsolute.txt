@@ -1,0 +1,11 @@
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\bin\Debug\Client.FormIhm.exe.config
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\bin\Debug\Client.FormIhm.exe
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\bin\Debug\Client.FormIhm.pdb
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.csprojAssemblyReference.cache
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.Form1.resources
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.Properties.Resources.resources
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.csproj.GenerateResource.cache
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.csproj.CoreCompileInputs.cache
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.exe
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.pdb
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.PIM.resources

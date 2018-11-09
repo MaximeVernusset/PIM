@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MyAirport.Pim.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MyAirport.Pim.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="BagageDefinition">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Classe" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodeIata" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Compagnie" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateVol" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EnContinuation" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IdBagage" type="xs:int" />
+      <xs:element minOccurs="0" name="Itineraire" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Ligne" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prioritaire" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Rush" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BagageDefinition" nillable="true" type="tns:BagageDefinition" />
+  <xs:complexType name="MultipleBagageFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeIata" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListBagages" nillable="true" type="tns:ArrayOfBagageDefinition" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MultipleBagageFault" nillable="true" type="tns:MultipleBagageFault" />
+  <xs:complexType name="ArrayOfBagageDefinition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BagageDefinition" nillable="true" type="tns:BagageDefinition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBagageDefinition" nillable="true" type="tns:ArrayOfBagageDefinition" />
+</xs:schema>
