@@ -156,7 +156,7 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.groupBox_bagage);
-			this.splitContainer1.Size = new System.Drawing.Size(514, 123);
+			this.splitContainer1.Size = new System.Drawing.Size(514, 91);
 			this.splitContainer1.SplitterDistance = 260;
 			this.splitContainer1.TabIndex = 4;
 			// 
@@ -168,10 +168,10 @@
 			this.groupBox_vol.Controls.Add(this.label4);
 			this.groupBox_vol.Controls.Add(this.label3);
 			this.groupBox_vol.Controls.Add(this.label2);
-			this.groupBox_vol.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox_vol.Dock = System.Windows.Forms.DockStyle.Top;
 			this.groupBox_vol.Location = new System.Drawing.Point(0, 0);
 			this.groupBox_vol.Name = "groupBox_vol";
-			this.groupBox_vol.Size = new System.Drawing.Size(260, 123);
+			this.groupBox_vol.Size = new System.Drawing.Size(260, 91);
 			this.groupBox_vol.TabIndex = 1;
 			this.groupBox_vol.TabStop = false;
 			this.groupBox_vol.Text = "Vol";
@@ -238,10 +238,10 @@
 			this.groupBox_bagage.Controls.Add(this.textBox_Itineraire);
 			this.groupBox_bagage.Controls.Add(this.label6);
 			this.groupBox_bagage.Controls.Add(this.label5);
-			this.groupBox_bagage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox_bagage.Dock = System.Windows.Forms.DockStyle.Top;
 			this.groupBox_bagage.Location = new System.Drawing.Point(0, 0);
 			this.groupBox_bagage.Name = "groupBox_bagage";
-			this.groupBox_bagage.Size = new System.Drawing.Size(250, 123);
+			this.groupBox_bagage.Size = new System.Drawing.Size(250, 91);
 			this.groupBox_bagage.TabIndex = 2;
 			this.groupBox_bagage.TabStop = false;
 			this.groupBox_bagage.Text = "Bagage";
