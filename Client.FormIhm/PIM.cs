@@ -1,4 +1,4 @@
-﻿using Client.FormIhm.ServiceReferencePim;
+﻿using Client.FormIhm;
 using System;
 using System.ServiceModel;
 using System.Windows.Forms;
@@ -191,7 +191,7 @@ namespace Client.FormIhm
 		{
 			try
 			{
-				BagageDefinition bagage = this.proxy.GetBagageByCodeIata(this.textBox_CodeIata.Text);
+				ServiceReferencePim.BagageDefinition bagage = this.proxy.GetBagageByCodeIata(this.textBox_CodeIata.Text);
 
 				if (bagage != null)
 				{
@@ -211,7 +211,7 @@ namespace Client.FormIhm
 					this.toolStripStatusLabelMessage.Text = "Aucune correspondance trouvée";
 				}
 			}
-			catch (FaultException<MultipleBagageFault> ex)
+			catch (FaultException<ServiceReferencePim.MultipleBagageFault> ex)
 			{
 				MessageBox.Show(ex.Detail.Message);
 			}
@@ -238,7 +238,7 @@ namespace Client.FormIhm
 		{
 			try
 			{
-				BagageDefinition newBag = new BagageDefinition
+				ServiceReferencePim.BagageDefinition newBag = new ServiceReferencePim.BagageDefinition
 				{
 					IdBagage = -1, //ID à -1 car ce n'est pas à nous de le créer, il est auto-incrémenté à l'insertion dans la base
 					CodeIata = this.textBox_CodeIata.Text,
@@ -267,6 +267,7 @@ namespace Client.FormIhm
 			catch(FaultException ex)
 			{
 				MessageBox.Show(ex.Message);
+				//TODO : choisir le bagage à afficher parmi la liste retrounée
 			}
 			catch (CommunicationException ex)
 			{
