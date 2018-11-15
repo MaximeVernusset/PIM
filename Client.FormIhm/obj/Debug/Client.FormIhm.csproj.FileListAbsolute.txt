@@ -9,3 +9,4 @@ C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .
 C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.exe
 C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.pdb
 C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.PIM.resources
+C:\Users\maxla\Documents\Ecole\ING 5\Internet Nouvelle Génération\Plateforme .Net\TP\MyAirport.Pim\Client.FormIhm\obj\Debug\Client.FormIhm.ChooseBagagePopup.resources

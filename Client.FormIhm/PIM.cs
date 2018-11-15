@@ -1,5 +1,6 @@
 ﻿using Client.FormIhm;
 using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows.Forms;
 
@@ -81,9 +82,12 @@ namespace Client.FormIhm
 			}
 		}
 
+
 		#region GestionVue
 		private void deconnecter()
 		{
+			this.Enabled = true;
+
 			this.groupBox_recherche.Visible = false;
 			this.groupBox_resultat.Visible = false;
 			this.groupBox_resultat.Enabled = false;
@@ -93,6 +97,8 @@ namespace Client.FormIhm
 
 		private void attenteBagage()
 		{
+			this.Enabled = true;
+
 			this.groupBox_resultat.Visible = true;
 			this.groupBox_recherche.Visible = true;
 			this.groupBox_resultat.Enabled = false;
@@ -116,11 +122,13 @@ namespace Client.FormIhm
 
 		private void selectBagage()
 		{
-
+			this.Enabled = false;
 		}
 
 		private void creationBagage()
 		{
+			this.Enabled = true;
+
 			this.groupBox_resultat.Visible = true;
 			this.groupBox_recherche.Visible = true;
 			this.groupBox_resultat.Enabled = true;
@@ -143,12 +151,29 @@ namespace Client.FormIhm
 
 		private void afficherBagage()
 		{
+			this.Enabled = true;
+
 			this.groupBox_resultat.Visible = true;
 			this.groupBox_resultat.Enabled = false;
 			this.groupBox_recherche.Visible = true;
 			this.groupBox_recherche.Enabled = false;
 
 			this.button_CreerBagage.Visible = false;
+		}
+
+		/// <summary>
+		/// Affiche dans les champs de la vue les infos du bagage.
+		/// </summary>
+		/// <param name="bagage">Bagage à afficher.</param>
+		private void afficherBagageInfo(ServiceReferencePim.BagageDefinition bagage)
+		{
+			this.textBox_Compagnie.Text = bagage.Compagnie;
+			this.textBox_Ligne1.Text = bagage.Ligne;
+			this.textBox_JourExploitation.Text = bagage.DateVol.ToString();
+			this.textBox_Itineraire.Text = bagage.Itineraire;
+			this.textBox_ClasseBagage.Text = bagage.Classe;
+			this.checkBox_Continuation.Checked = bagage.EnContinuation;
+			this.checkBox_Rush.Checked = bagage.Rush;
 		}
 		#endregion
 
@@ -195,14 +220,7 @@ namespace Client.FormIhm
 
 				if (bagage != null)
 				{
-					this.textBox_Compagnie.Text = bagage.Compagnie;
-					this.textBox_Ligne1.Text = bagage.Ligne;
-					this.textBox_JourExploitation.Text = bagage.DateVol.ToString();
-					this.textBox_Itineraire.Text = bagage.Itineraire;
-					this.textBox_ClasseBagage.Text = bagage.Classe;
-					this.checkBox_Continuation.Checked = bagage.EnContinuation;
-					this.checkBox_Rush.Checked = bagage.Rush;
-
+					this.afficherBagageInfo(bagage);
 					this.State = PimState.AffichageBagage;
 				}
 				else
@@ -211,9 +229,12 @@ namespace Client.FormIhm
 					this.toolStripStatusLabelMessage.Text = "Aucune correspondance trouvée";
 				}
 			}
-			catch (FaultException<ServiceReferencePim.MultipleBagageFault> ex)
+			catch (FaultException<ServiceReferencePim.MultipleBagageFault> ex) //Plusieurs bagages rerournés
 			{
-				MessageBox.Show(ex.Detail.Message);
+				this.State = PimState.SelectionBagage;
+				this.toolStripStatusLabelMessage.Text = ex.Detail.Message;
+				this.afficherBagageInfo(selectionnerBagage(new List<ServiceReferencePim.BagageDefinition>(ex.Detail.ListBagages))); //Sélection et affichage du bagage parmi la liste reçue
+				this.State = PimState.AffichageBagage;
 			}
 			catch (FaultException ex)
 			{
@@ -228,6 +249,19 @@ namespace Client.FormIhm
 				MessageBox.Show("Une erreur s’est produite dans le traitement de votre demande.\nMerci de bien vouloir réessayer ultérieurement ou contacter votre administrateur.", "Erreur dans le traitement de votre demande", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
+
+		/// <summary>
+		/// Ouvre une popup listant les Id des bagages retournés.
+		/// </summary>
+		/// <param name="bagages">Liste de bagages retournés.</param>
+		/// <returns>Le bagage choisi.</returns>
+		private ServiceReferencePim.BagageDefinition selectionnerBagage(List<ServiceReferencePim.BagageDefinition> bagages)
+		{
+			ChooseBagagePopup f2 = new ChooseBagagePopup(bagages);
+			f2.ShowDialog(this);
+			return bagages[f2.IndexBagageChoisi];
+		}
+		
 
 		/// <summary>
 		/// Demande au service web de créer un bagage dans la base de données en lui transmettant les informations du bagage renseignées par l'utilisateur.
@@ -267,7 +301,6 @@ namespace Client.FormIhm
 			catch(FaultException ex)
 			{
 				MessageBox.Show(ex.Message);
-				//TODO : choisir le bagage à afficher parmi la liste retrounée
 			}
 			catch (CommunicationException ex)
 			{
