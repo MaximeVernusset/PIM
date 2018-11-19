@@ -54,6 +54,8 @@ namespace Client.FormIhm
 
 		/// <summary>
 		/// Méthode abonnée à l'événement de changement d'état.
+		/// Met à jour la barre de status.
+		/// Appelle la bonne méthode de gestion de l'interface.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="state">Nouvel état</param>
@@ -122,7 +124,7 @@ namespace Client.FormIhm
 
 		private void selectBagage()
 		{
-			this.Enabled = false;
+			this.Enabled = false; //Inutile car le popup est modal, mais permet de désactiver l'ensemble de la fenêtre visuellement au lieu de laisser activée la 1ère 
 		}
 
 		private void creationBagage()
@@ -208,7 +210,7 @@ namespace Client.FormIhm
 		/// <summary>
 		/// Récupère depuis le webservice le bagage associé au code Iata entré, et affiche les informations du bagage.
 		/// Si le code Iata n'existe pas en base, il est alors possible de créer le bagage.
-		/// Dans le cas de plusieurs bagages associés au code Iata, une popup demande quel bagage afficher.
+		/// Dans le cas de plusieurs bagages associés au code Iata, un popup demande quel bagage afficher.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -229,12 +231,23 @@ namespace Client.FormIhm
 					this.toolStripStatusLabelMessage.Text = "Aucune correspondance trouvée";
 				}
 			}
-			catch (FaultException<ServiceReferencePim.MultipleBagageFault> ex) //Plusieurs bagages rerournés
+			catch (FaultException<ServiceReferencePim.MultipleBagageFault> ex) //Plusieurs bagages retournés
 			{
 				this.State = PimState.SelectionBagage;
 				this.toolStripStatusLabelMessage.Text = ex.Detail.Message;
-				this.afficherBagageInfo(selectionnerBagage(new List<ServiceReferencePim.BagageDefinition>(ex.Detail.ListBagages))); //Sélection et affichage du bagage parmi la liste reçue
-				this.State = PimState.AffichageBagage;
+
+				//Ouvre un popup listant les bagages retournés.
+				ChooseBagagePopup popup = new ChooseBagagePopup(new List<ServiceReferencePim.BagageDefinition>(ex.Detail.ListBagages));
+				if (popup.ShowDialog(this) == DialogResult.OK)
+				{
+					this.afficherBagageInfo(ex.Detail.ListBagages[popup.IndexBagageChoisi]);
+					this.State = PimState.AffichageBagage;
+				}
+				else
+				{
+					this.State = PimState.AttenteBagage;
+				}
+				popup.Dispose();
 			}
 			catch (FaultException ex)
 			{
@@ -248,18 +261,6 @@ namespace Client.FormIhm
 			{
 				MessageBox.Show("Une erreur s’est produite dans le traitement de votre demande.\nMerci de bien vouloir réessayer ultérieurement ou contacter votre administrateur.", "Erreur dans le traitement de votre demande", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-		}
-
-		/// <summary>
-		/// Ouvre une popup listant les Id des bagages retournés.
-		/// </summary>
-		/// <param name="bagages">Liste de bagages retournés.</param>
-		/// <returns>Le bagage choisi.</returns>
-		private ServiceReferencePim.BagageDefinition selectionnerBagage(List<ServiceReferencePim.BagageDefinition> bagages)
-		{
-			ChooseBagagePopup f2 = new ChooseBagagePopup(bagages);
-			f2.ShowDialog(this);
-			return bagages[f2.IndexBagageChoisi];
 		}
 		
 
@@ -280,7 +281,7 @@ namespace Client.FormIhm
 					Ligne = this.textBox_Ligne1.Text,
 					DateVol = DateTime.Parse(this.textBox_JourExploitation.Text), //Conversion string en DateTime
 					Itineraire = this.textBox_Itineraire.Text,
-					Prioritaire = false, //False par défaut, car de pas champ dans l'interface pour renseigner paramètre (également en rapport avec la classe du bagage pas gérée non plus)
+					Prioritaire = false, //False par défaut, car pas de champ dans l'interface pour renseigner ce paramètre (également en rapport avec la classe du bagage pas gérée non plus)
 					Classe = this.textBox_ClasseBagage.Text,
 					EnContinuation = this.checkBox_Continuation.Checked,
 					Rush = this.checkBox_Rush.Checked

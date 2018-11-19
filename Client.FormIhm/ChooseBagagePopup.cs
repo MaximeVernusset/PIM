@@ -20,7 +20,7 @@ namespace Client.FormIhm
 
 		/// <summary>
 		/// Constructeur.
-		/// Remplit la combonbox avec les ID de chaque bagage et sélectionne le 1er par défaut.
+		/// Remplit la combobox avec les ID de chaque bagage et sélectionne le 1er par défaut.
 		/// </summary>
 		/// <param name="bagages"></param>
 		public ChooseBagagePopup(List<ServiceReferencePim.BagageDefinition> bagages)
@@ -28,7 +28,7 @@ namespace Client.FormIhm
 			InitializeComponent();
 
 			foreach (ServiceReferencePim.BagageDefinition bag in bagages)
-				this.comboBox_IdBagages.Items.Add(bag.IdBagage);
+				this.comboBox_IdBagages.Items.Add(String.Format("ID: {0}, Comp: {1}, Ligne: {2}", bag.IdBagage, bag.Compagnie, bag.Ligne));
 			this.comboBox_IdBagages.SelectedIndex = this.IndexBagageChoisi = 0;
 		}
 
@@ -39,13 +39,14 @@ namespace Client.FormIhm
 		/// <param name="e"></param>
 		private void button_ok_Click(object sender, EventArgs e)
 		{
-			if (this.comboBox_IdBagages.SelectedIndex >= 0 && this.comboBox_IdBagages.SelectedIndex < this.comboBox_IdBagages.Items.Count)
+			if (this.comboBox_IdBagages.SelectedIndex >= 0 && this.comboBox_IdBagages.SelectedIndex < this.comboBox_IdBagages.Items.Count) //Condition toujours vraie normalement
 			{
 				this.IndexBagageChoisi = this.comboBox_IdBagages.SelectedIndex;
-				this.Close();
-			}
-			else
-				MessageBox.Show("Veuillez sélectionner un ID de bagage");			
+			}		
+		}
+
+		private void button_cancel_Click(object sender, EventArgs e)
+		{
 		}
 	}
 }
