@@ -54,7 +54,7 @@ namespace Client.FormIhm
 
 		/// <summary>
 		/// Méthode abonnée à l'événement de changement d'état.
-		/// Met à jour la barre de status.
+		/// Met à jour la barre de statut.
 		/// Appelle la bonne méthode de gestion de l'interface.
 		/// </summary>
 		/// <param name="sender"></param>
@@ -249,15 +249,15 @@ namespace Client.FormIhm
 				}
 				popup.Dispose();
 			}
-			catch (FaultException ex)
+			catch (FaultException)
 			{
 				MessageBox.Show("Une erreur s'est produite dans le traitement de votre demande.");
 			}
-			catch (CommunicationException ex)
+			catch (CommunicationException)
 			{
 				MessageBox.Show("Une erreur de communication s'est produite dans le traitement de votre demande.");
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				MessageBox.Show("Une erreur s’est produite dans le traitement de votre demande.\nMerci de bien vouloir réessayer ultérieurement ou contacter votre administrateur.", "Erreur dans le traitement de votre demande", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -295,7 +295,7 @@ namespace Client.FormIhm
 				else
 					MessageBox.Show("Le bagage n'a pas pu être créé.");
 			}
-			catch(FormatException ex)
+			catch(FormatException)
 			{
 				MessageBox.Show("Le jour d'exploitation doit respecter le format jj/mm/aaa hh:mm:ss");
 			}
@@ -303,11 +303,11 @@ namespace Client.FormIhm
 			{
 				MessageBox.Show(ex.Message);
 			}
-			catch (CommunicationException ex)
+			catch (CommunicationException)
 			{
 				MessageBox.Show("Une erreur de communication s'est produite dans le traitement de votre demande.");
 			}
-			catch (Exception ex)
+			catch
 			{
 				MessageBox.Show("Une erreur s’est produite dans le traitement de votre demande.\nMerci de bien vouloir réessayer ultérieurement ou contacter votre administrateur.", "Erreur dans le traitement de votre demande", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}

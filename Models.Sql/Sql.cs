@@ -119,6 +119,7 @@ namespace MyAirport.Pim.Models
 		/// <summary>
 		/// Crée le bagage dans la base de données.
 		/// Si le bagage est "rush", insère le bagage dans la table BAGAGE_A_POUR_PARTICULARITE.
+		/// Utilise une transaction pour rendre le traitement atomique, et pouvoir annuler l'insertion du bagage en cas de problème.
 		/// </summary>
 		/// <param name="bag">Bagae à créer</param>
 		/// <returns>True si le bagae a bien été inséré en base, False sinon.</returns>
@@ -150,7 +151,6 @@ namespace MyAirport.Pim.Models
 					//Si le bagage est rush, on insère une entrée dans BAGAGE_A_POUR_PARTICULARITE.
 					if (bag.Rush)
 					{
-
 						SqlCommand cmdAssociateBagageRush = new SqlCommand(this.commandAssociateBagageRush, connection);
 						cmdAssociateBagageRush.Connection = connection;
 						cmdAssociateBagageRush.Transaction = transaction;
@@ -164,7 +164,7 @@ namespace MyAirport.Pim.Models
 
 					return inserted;
 				}
-				catch(Exception ex)
+				catch
 				{
 					try
 					{

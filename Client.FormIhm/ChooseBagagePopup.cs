@@ -14,7 +14,7 @@ namespace Client.FormIhm
 	{
 		/// <summary>
 		/// Index de l'item de la combobox choisi.
-		/// Correspond à l'index de la liste de gabages fournie.
+		/// Correspond à l'index de la liste de bagages fournie.
 		/// </summary>
 		public int IndexBagageChoisi { get; private set; }
 
@@ -22,7 +22,7 @@ namespace Client.FormIhm
 		/// Constructeur.
 		/// Remplit la combobox avec les ID de chaque bagage et sélectionne le 1er par défaut.
 		/// </summary>
-		/// <param name="bagages"></param>
+		/// <param name="bagages">Liste des bagages</param>
 		public ChooseBagagePopup(List<ServiceReferencePim.BagageDefinition> bagages)
 		{
 			InitializeComponent();
@@ -33,20 +33,14 @@ namespace Client.FormIhm
 		}
 
 		/// <summary>
-		/// Enregistre l'index sélectionné et ferme le popup.
+		/// Enregistre l'index sélectionné.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void button_ok_Click(object sender, EventArgs e)
 		{
 			if (this.comboBox_IdBagages.SelectedIndex >= 0 && this.comboBox_IdBagages.SelectedIndex < this.comboBox_IdBagages.Items.Count) //Condition toujours vraie normalement
-			{
 				this.IndexBagageChoisi = this.comboBox_IdBagages.SelectedIndex;
-			}		
-		}
-
-		private void button_cancel_Click(object sender, EventArgs e)
-		{
 		}
 	}
 }
